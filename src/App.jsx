@@ -7,6 +7,7 @@ const Icon = ({ n }) => <svg className="i" viewBox="0 0 24 24" dangerouslySetInn
 const NAV = [['home','Home'],['about','About'],['exp','Experience'],['projects','Projects'],['skills','Skills'],['edu','Education'],['certs','Certifications'],['ach','Achievements'],['contact','Contact']]
 const ROLES = ['AI & Software Developer','Research Assistant · FUI Energy Analytics','Teaching Assistant · Programming Fundamentals']
 const EMAIL = 'fatimaiqbal1166@gmail.com'
+const EMAIL_LINK = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(EMAIL)}`
 const PROJECTS = [
   { tag:'Final Year Project', name:'DermaScanAI — Smart SkinCare', text:'An AI-powered skincare project combining machine learning and LLM technology with a React Native app and Firebase.', tech:['ML','LLM','React Native','Firebase'] },
   { tag:'Web & Mobile', name:'Probation Evaluator', text:'A student probation case evaluation application with a FastAPI backend and a React frontend.', tech:['FastAPI','React','Tailwind'], href:'https://probation-evaluator.vercel.app', cta:'Live demo' },
@@ -160,7 +161,7 @@ export default function App() {
           <div className="logo">F</div><h1>Fatima Iqbal</h1><small>AI &amp; Software Developer</small>
           <nav>{NAV.map(([id, label]) => <a key={id} href={`#${id}`} className={active === id ? 'on' : ''}>{label}</a>)}</nav>
           <div className="soc">
-            <a href={`mailto:${EMAIL}`} aria-label="Email"><Icon n="mail" /></a>
+            <a href={EMAIL_LINK} target="_blank" rel="noopener noreferrer" aria-label="Email"><Icon n="mail" /></a>
             <a href="https://github.com/Fatima1166" target="_blank" rel="noopener" aria-label="GitHub"><Icon n="gh" /></a>
             <a href="https://www.linkedin.com/in/fatima1166/" target="_blank" rel="noopener" aria-label="LinkedIn"><Icon n="in" /></a>
           </div>
@@ -172,7 +173,7 @@ export default function App() {
               <h2>Building intelligent software, <em>one dataset</em> at a time.</h2>
               <p className="role"><span>{role}</span><i>&nbsp;</i></p>
               <p className="lead">IT student at Foundation University with hands-on experience as a Teaching Assistant and Research Assistant. I build web, mobile and ML-based projects, and I'm seeking a remote internship in software development, AI/ML or data-driven roles.</p>
-              <a className="btn p" href="#projects">Explore projects</a><a className="btn s" href={`mailto:${EMAIL}`}><Icon n="mail" />Get in touch</a>
+              <a className="btn p" href="#projects">Explore projects</a><a className="btn s" href={EMAIL_LINK} target="_blank" rel="noopener noreferrer"><Icon n="mail" />Get in touch</a>
             </div>
             <Scene />
           </section>
@@ -213,7 +214,7 @@ export default function App() {
 
           <section id="contact"><Head eyebrow="Contact" title="Let's work together" />
             <Card style={{ maxWidth: 640 }}><p style={{ marginBottom: 18 }}>Seeking a remote internship in software development, AI/ML or data-driven roles.</p>
-              <a className="btn p" href={`mailto:${EMAIL}`}><Icon n="mail" />{EMAIL}</a>
+              <a className="btn p" href={EMAIL_LINK} target="_blank" rel="noopener noreferrer"><Icon n="mail" />{EMAIL}</a>
               <a className="btn s" href="https://www.linkedin.com/in/fatima1166/" target="_blank" rel="noopener">LinkedIn</a>
               <a className="btn s" href="https://github.com/Fatima1166" target="_blank" rel="noopener">GitHub</a></Card>
             <footer>© 2026 Fatima Iqbal</footer></section>
