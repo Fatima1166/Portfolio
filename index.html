@@ -87,13 +87,20 @@ h2::after{content:"";display:block;width:64px;height:4px;border-radius:4px;margi
 .glass{position:relative;overflow:hidden;border-radius:20px;border:1px solid transparent;background:linear-gradient(160deg,rgba(20,67,97,.55),rgba(7,28,52,.6)) padding-box,linear-gradient(160deg,rgba(135,178,204,.6),rgba(135,178,204,.08) 45%,rgba(98,152,188,.38)) border-box;box-shadow:0 18px 50px rgba(0,0,0,.28)}
 .glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),rgba(135,178,204,.22),transparent 60%)}
 .glass:hover::after{opacity:1}
-.card{padding:0;gap:0}
+.card{padding:0;gap:0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.card-media{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:rgba(7,28,52,.85)}
+.card-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.card:hover .card-img{transform:scale(1.05)}
+.card-btn-float{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;background:rgba(7,28,52,.82);border:1px solid rgba(135,178,204,.45);color:var(--sky);display:grid;place-items:center;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 6px 18px rgba(0,0,0,.4);transition:transform .2s,background .2s,color .2s;text-decoration:none;z-index:2}
+.card-btn-float:hover{transform:scale(1.12);background:var(--sky);color:var(--ink);border-color:var(--sky)}
+.card-btn-float svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .card .top{height:5px;background:linear-gradient(90deg,var(--steel),var(--sky),var(--mist))}
 .card .in{display:flex;flex-direction:column;gap:14px;flex:1;padding:24px 28px 26px}
+.card h3{font:700 1.35rem/1.25 'Playfair Display',Georgia,serif;color:#fff;letter-spacing:-.01em}
 .card:hover{box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 1px rgba(135,178,204,.4)}
 .card.feat{grid-column:span 2}
 .card.feat h3{font-size:1.7rem}
-.card .tag{align-self:flex-start;font-size:.85rem;padding:4px 14px;border-radius:999px;background:rgba(135,178,204,.16);color:var(--sky)}
+.card .tag{align-self:flex-start;font-size:.82rem;font-weight:600;padding:4px 14px;border-radius:999px;background:rgba(135,178,204,.16);color:var(--sky);letter-spacing:.02em}
 .card .links{display:flex;flex-wrap:wrap;gap:10px;padding-top:16px;border-top:1px solid var(--line)}
 .card .links .btn{padding:9px 22px}
 .card .links .btn:first-child{background:var(--steel);color:var(--ink)}
@@ -261,13 +268,13 @@ h2::after{content:"";display:block;width:64px;height:4px;border-radius:4px;margi
 <script>
 const G='https://github.com/Fatima1166/';
 const PROJECTS=[
- {t:'Final Year Project',n:'DermaScanAI: Smart SkinCare',d:'An AI-powered skincare app that combines machine learning and a large language model for intelligent skin analysis and personalized care guidance. React Native interface with Firebase authentication and storage.',k:['Machine Learning','LLM','React Native','Firebase'],l:[['GitHub',G+'DermaScanAI']]},
- {t:'Dashboard / Web',n:'Ledgerline: Operations Dashboard',d:'An operations dashboard that brings key business records and activity into one place for clear, data-driven day-to-day decisions.',k:['Dashboard','Web'],l:[['GitHub',G+'ops-dashbaord']]},
- {t:'Management System',n:'Varaqly Bookstore Management',d:'A bookstore system to organize inventory, sales and customer records through a friendly interface backed by a structured database.',k:['Database','Web'],l:[['GitHub',G+'varaqly']]},
- {t:'Student Management System',n:'Probation Evaluator',d:'Checks student academic performance against probation criteria, tracks standing and simplifies review workflows for transparent decisions.',k:['FastAPI','React','Tailwind'],l:[['GitHub',G+'Probation-Evaluator']]},
- {t:'Data Security',n:'Cognitive Metamorphic Cipher',d:'A custom encryption system that applies cryptographic principles and cyber security concepts to protect sensitive data from unauthorized access.',k:['Cryptography','PHP','Security'],l:[['GitHub',G+'CONITIVE-METAMORPHIC-CIPHER-']]},
- {t:'AI / RAG',n:'RAGDOC Assistant',d:'A document assistant using Retrieval-Augmented Generation so users can query uploaded documents and get accurate, context-aware answers.',k:['RAG','LLM','Python'],l:[['GitHub',G+'rag-doc-assistant']]},
- {t:'Data Analysis and Visualization',n:'FUI Energy Analytics',d:'Analysis and visualization of Pakistan’s energy data to uncover trends and support research findings, shared through dashboards and reports.',k:['Python','Power BI','Data Analysis'],l:[['GitHub',G+'Energy-Analytics']]}
+ {t:'Final Year Project · AI & Mobile',n:'DermaScanAI: Smart SkinCare',d:'An AI-powered skincare app that combines machine learning and a large language model for intelligent skin analysis and personalized care guidance. React Native interface with Firebase authentication and storage.',k:['Machine Learning','LLM','React Native','Firebase'],l:[['GitHub',G+'DermaScanAI']],img:'project/Derma.png'},
+ {t:'Dashboard / Web · Analytics',n:'Ledgerline: Operations Dashboard',d:'An operations dashboard that brings key business records and activity into one place for clear, data-driven day-to-day decisions.',k:['Dashboard','Web'],l:[['GitHub',G+'ops-dashbaord']],img:'project/ops-dashboard-thumbnail.png'},
+ {t:'Management System · Full Stack',n:'Varaqly Bookstore Management',d:'A bookstore system to organize inventory, sales and customer records through a friendly interface backed by a structured database.',k:['Database','Web'],l:[['GitHub',G+'varaqly']],img:'project/Varaqly.png'},
+ {t:'Student Management System',n:'Probation Evaluator',d:'Checks student academic performance against probation criteria, tracks standing and simplifies review workflows for transparent decisions.',k:['FastAPI','React','Tailwind'],l:[['GitHub',G+'Probation-Evaluator']],img:'project/probation-evaluator-thumbnail.png'},
+ {t:'Data Security · Cryptography',n:'Cognitive Metamorphic Cipher',d:'A custom encryption system that applies cryptographic principles and cyber security concepts to protect sensitive data from unauthorized access.',k:['Cryptography','PHP','Security'],l:[['GitHub',G+'CONITIVE-METAMORPHIC-CIPHER-']],img:'project/Cognitive.png'},
+ {t:'AI / RAG · Document Assistant',n:'RAGDOC Assistant',d:'A document assistant using Retrieval-Augmented Generation so users can query uploaded documents and get accurate, context-aware answers.',k:['RAG','LLM','Python'],l:[['GitHub',G+'rag-doc-assistant']],img:'project/rag-doc-assistant-thumbnail.png'},
+ {t:'Data Analysis and Visualization',n:'FUI Energy Analytics',d:'Analysis and visualization of Pakistan’s energy data to uncover trends and support research findings, shared through dashboards and reports.',k:['Python','Power BI','Data Analysis'],l:[['GitHub',G+'Energy-Analytics']],img:'project/Energy-analytics.jpeg'}
 ];
 const SKILLS=[
  {title:'Frontend Development',desc:'Visual screens, buttons, and layouts people interact with.',icon:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',items:['React.js','JavaScript (ES6+)','React Native','HTML5','CSS3','Tailwind CSS']},
@@ -279,7 +286,10 @@ const SKILLS=[
 ];
 const grid=document.getElementById('grid');
 PROJECTS.forEach((p,i)=>{const c=document.createElement('article');c.className='glass card';
- c.innerHTML=`<div class="top"></div><div class="in"><span class="tag">${p.t}</span><h3>${p.n}</h3><p>${p.d}</p><div class="tech">${p.k.map(x=>`<span>${x}</span>`).join('')}</div>`+
+ const link=p.l.length?p.l[0][1]:'';
+ const floatBtn=link?`<a class="card-btn-float" href="${link}" target="_blank" rel="noopener" aria-label="Open ${p.n}"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>`:`<span class="card-btn-float" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>`;
+ c.innerHTML=`<div class="card-media"><img class="card-img" src="${p.img}" alt="${p.n} preview" loading="lazy">${floatBtn}</div>`+
+ `<div class="in"><span class="tag">${p.t}</span><h3>${p.n}</h3><p>${p.d}</p><div class="tech">${p.k.map(x=>`<span>${x}</span>`).join('')}</div>`+
  (p.l.length?`<div class="links">${p.l.map(([a,h])=>`<a class="btn" href="${h}" target="_blank" rel="noopener" aria-label="${p.n} ${a}">${a}</a>`).join('')}</div>`:'')+`</div>`;
  grid.appendChild(c);
  c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
