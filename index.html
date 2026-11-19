@@ -87,7 +87,7 @@ h2::after{content:"";display:block;width:64px;height:4px;border-radius:4px;margi
 .glass{position:relative;overflow:hidden;border-radius:20px;border:1px solid transparent;background:linear-gradient(160deg,rgba(20,67,97,.55),rgba(7,28,52,.6)) padding-box,linear-gradient(160deg,rgba(135,178,204,.6),rgba(135,178,204,.08) 45%,rgba(98,152,188,.38)) border-box;box-shadow:0 18px 50px rgba(0,0,0,.28)}
 .glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),rgba(135,178,204,.22),transparent 60%)}
 .glass:hover::after{opacity:1}
-.card{padding:0;gap:0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.card{padding:0;gap:0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer}
 .card-media{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:rgba(7,28,52,.85)}
 .card-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
 .card:hover .card-img{transform:scale(1.05)}
@@ -95,12 +95,15 @@ h2::after{content:"";display:block;width:64px;height:4px;border-radius:4px;margi
 .card-btn-float:hover{transform:scale(1.12);background:var(--sky);color:var(--ink);border-color:var(--sky)}
 .card-btn-float svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .card .top{height:5px;background:linear-gradient(90deg,var(--steel),var(--sky),var(--mist))}
-.card .in{display:flex;flex-direction:column;gap:14px;flex:1;padding:24px 28px 26px}
+.card .in{display:flex;flex-direction:column;gap:12px;flex:1;padding:22px 26px 24px}
 .card h3{font:700 1.35rem/1.25 'Playfair Display',Georgia,serif;color:#fff;letter-spacing:-.01em}
 .card:hover{box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 1px rgba(135,178,204,.4)}
 .card.feat{grid-column:span 2}
 .card.feat h3{font-size:1.7rem}
 .card .tag{align-self:flex-start;font-size:.82rem;font-weight:600;padding:4px 14px;border-radius:999px;background:rgba(135,178,204,.16);color:var(--sky);letter-spacing:.02em}
+.card-action{display:flex;align-items:center;gap:6px;font:600 .86rem var(--display);color:var(--sky);margin-top:auto;padding-top:10px}
+.card-action svg{width:16px;height:16px;transition:transform .2s ease}
+.card:hover .card-action svg{transform:translateX(4px)}
 .card .links{display:flex;flex-wrap:wrap;gap:10px;padding-top:16px;border-top:1px solid var(--line)}
 .card .links .btn{padding:9px 22px}
 .card .links .btn:first-child{background:var(--steel);color:var(--ink)}
@@ -111,6 +114,24 @@ h2::after{content:"";display:block;width:64px;height:4px;border-radius:4px;margi
 .cert h3{font-size:1.3rem}
 .cert .links .btn{background:var(--steel);color:var(--ink)}
 .cert:hover .links .btn{background:var(--sky);border-color:var(--sky)}
+
+/* Project Details Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(7,28,52,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal-card{position:relative;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;border-radius:24px;background:linear-gradient(160deg,rgba(20,67,97,.95),rgba(7,28,52,.98)) padding-box,linear-gradient(160deg,rgba(135,178,204,.6),rgba(135,178,204,.15) 50%,rgba(98,152,188,.4)) border-box;border:1px solid transparent;box-shadow:0 30px 90px rgba(0,0,0,.7);transform:scale(.92) translateY(14px);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.modal-overlay.open .modal-card{transform:scale(1) translateY(0)}
+.modal-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;background:rgba(7,28,52,.85);border:1px solid rgba(135,178,204,.4);color:#fff;font-size:1.3rem;line-height:1;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(10px);z-index:3;transition:background .2s,color .2s,transform .2s}
+.modal-close:hover{background:var(--sky);color:var(--ink);transform:scale(1.1)}
+.modal-media{position:relative;width:100%;aspect-ratio:16/9;max-height:280px;overflow:hidden;border-radius:22px 22px 0 0;background:rgba(7,28,52,.9)}
+.modal-media img{width:100%;height:100%;object-fit:cover;display:block}
+.modal-in{padding:26px 30px 30px;display:flex;flex-direction:column;gap:14px}
+.modal-in h3{font:700 clamp(1.4rem,2.8vw,1.8rem)/1.2 'Playfair Display',Georgia,serif;color:#fff;letter-spacing:-.01em}
+.modal-in p{color:var(--mist);font-size:1rem;line-height:1.7}
+.modal-in .tech{display:flex;flex-wrap:wrap;gap:8px}
+.modal-in .tech span{font-size:.85rem;padding:4px 14px;border-radius:999px;background:rgba(7,28,52,.75);border:1px solid var(--line);color:#fff}
+.modal-in .links{display:flex;flex-wrap:wrap;gap:12px;padding-top:16px;border-top:1px solid var(--line)}
+.modal-in .links .btn{padding:10px 24px}
+body.modal-open{overflow:hidden}
 
 /* Timeline Experience Section (Website Theme) */
 #experience{max-width:1100px}
@@ -262,6 +283,23 @@ h2::after{content:"";display:block;width:64px;height:4px;border-radius:4px;margi
     </div>
   </section>
 </main>
+
+<div id="projectModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose" aria-label="Close dialog">&times;</button>
+    <div class="modal-media">
+      <img id="modalImg" src="" alt="">
+    </div>
+    <div class="modal-in">
+      <span class="tag" id="modalTag"></span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <div class="tech" id="modalTech"></div>
+      <div class="links" id="modalLinks"></div>
+    </div>
+  </div>
+</div>
+
 <footer>Fatima Iqbal, 2026</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -284,14 +322,53 @@ const SKILLS=[
  {title:'Databases & Storage',desc:'Structured schemas, relational queries, and cloud storage systems.',icon:'<svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',items:['MySQL','Firebase Firestore','SQL Server','Database Design','Data Modeling','Query Optimization']},
  {title:'Tools & Concepts',desc:'Development environments, version control, analytics, and core CS.',icon:'<svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',items:['Git & GitHub','Power BI Dashboards','VS Code & Visual Studio','Google Colab','OOP & Data Structures','Cyber Security']}
 ];
+const modal=document.getElementById('projectModal'),
+      modalClose=document.getElementById('modalClose'),
+      modalImg=document.getElementById('modalImg'),
+      modalTag=document.getElementById('modalTag'),
+      modalTitle=document.getElementById('modalTitle'),
+      modalDesc=document.getElementById('modalDesc'),
+      modalTech=document.getElementById('modalTech'),
+      modalLinks=document.getElementById('modalLinks');
+
+function openModal(p){
+ modalImg.src=p.img;
+ modalImg.alt=p.n+' preview';
+ modalTag.textContent=p.t;
+ modalTitle.textContent=p.n;
+ modalDesc.textContent=p.d;
+ modalTech.innerHTML=p.k.map(x=>`<span>${x}</span>`).join('');
+ modalLinks.innerHTML=p.l.length?p.l.map(([a,h])=>`<a class="btn fill" href="${h}" target="_blank" rel="noopener">${a}</a>`).join(''):'';
+ modal.classList.add('open');
+ modal.setAttribute('aria-hidden','false');
+ document.body.classList.add('modal-open');
+}
+
+function closeModal(){
+ modal.classList.remove('open');
+ modal.setAttribute('aria-hidden','true');
+ document.body.classList.remove('modal-open');
+}
+
+modalClose.addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal()});
+
 const grid=document.getElementById('grid');
 PROJECTS.forEach((p,i)=>{const c=document.createElement('article');c.className='glass card';
+ c.setAttribute('tabindex','0');
+ c.setAttribute('role','button');
+ c.setAttribute('aria-label',`View details for ${p.n}`);
  const link=p.l.length?p.l[0][1]:'';
- const floatBtn=link?`<a class="card-btn-float" href="${link}" target="_blank" rel="noopener" aria-label="Open ${p.n}"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>`:`<span class="card-btn-float" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>`;
+ const floatBtn=link?`<a class="card-btn-float" href="${link}" target="_blank" rel="noopener" aria-label="Open ${p.n} repository"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>`:`<span class="card-btn-float" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>`;
  c.innerHTML=`<div class="card-media"><img class="card-img" src="${p.img}" alt="${p.n} preview" loading="lazy">${floatBtn}</div>`+
- `<div class="in"><span class="tag">${p.t}</span><h3>${p.n}</h3><p>${p.d}</p><div class="tech">${p.k.map(x=>`<span>${x}</span>`).join('')}</div>`+
- (p.l.length?`<div class="links">${p.l.map(([a,h])=>`<a class="btn" href="${h}" target="_blank" rel="noopener" aria-label="${p.n} ${a}">${a}</a>`).join('')}</div>`:'')+`</div>`;
+ `<div class="in"><span class="tag">${p.t}</span><h3>${p.n}</h3><div class="tech">${p.k.map(x=>`<span>${x}</span>`).join('')}</div>`+
+ `<div class="card-action"><span>View description & details</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>`;
  grid.appendChild(c);
+ c.addEventListener('click',()=>openModal(p));
+ c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openModal(p)}});
+ const fb=c.querySelector('.card-btn-float');
+ if(fb) fb.addEventListener('click',e=>e.stopPropagation());
  c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
   c.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg) translateZ(14px)`});
  c.addEventListener('pointerleave',()=>c.style.transform='');
