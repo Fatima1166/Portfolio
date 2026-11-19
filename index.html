@@ -199,6 +199,23 @@ body.modal-open{overflow:hidden}
   .about-stats{grid-template-columns:1fr}
   .about-card{padding:24px 22px}
 }
+
+/* Achievements Section Styling */
+.achieve-wrap{margin-top:80px}
+.achieve-header{margin-bottom:30px}
+.achieve-title{font:700 clamp(2.1rem,4.5vw,3rem)/1.15 'Playfair Display',Georgia,serif;color:#fff;letter-spacing:-.02em;margin-bottom:0}
+.achieve-title::after{display:none!important}
+.achieve-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px}
+.achieve-card{padding:28px 32px 30px;border-radius:20px;display:flex;flex-direction:column;gap:12px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.achieve-card:hover{transform:translateY(-3px);border-color:var(--sky);box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 1px rgba(135,178,204,.45)}
+.achieve-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:2px}
+.achieve-badge{font:600 .82rem var(--display);padding:4px 14px;border-radius:999px;background:rgba(135,178,204,.14);color:var(--sky);letter-spacing:.03em;border:1px solid rgba(135,178,204,.25)}
+.achieve-platform{font:500 .86rem var(--body);color:var(--mist);opacity:.85}
+.achieve-card h3{font:700 1.35rem/1.25 'Playfair Display',Georgia,serif;color:#fff;margin-top:4px}
+.achieve-org{font:600 .92rem var(--display);color:var(--sky);margin-bottom:4px}
+.achieve-desc{color:var(--mist);font-size:.96rem;line-height:1.65;flex:1}
+.achieve-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;padding-top:16px;border-top:1px solid rgba(135,178,204,.14)}
+.achieve-chips span{font-size:.82rem;padding:4px 12px;border-radius:8px;background:rgba(7,28,52,.75);border:1px solid var(--line);color:#fff}
 </style>
 </head>
 <body>
@@ -221,7 +238,7 @@ body.modal-open{overflow:hidden}
         <a class="btn fill" href="#projects">View projects</a>
         <a class="btn" href="https://github.com/Fatima1166" target="_blank" rel="noopener">GitHub profile</a>
         <a class="btn" href="https://www.linkedin.com/in/fatima1166/" target="_blank" rel="noopener">LinkedIn profile</a>
-        <a class="btn" href="mailto:fatimaiqbal1166@gmail.com">Email me</a>
+        <a class="btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=fatimaiqbal1166@gmail.com" target="_blank" rel="noopener">Gmail me</a>
       </div>
     </div>
   </section>
@@ -356,19 +373,52 @@ body.modal-open{overflow:hidden}
         <div class="top"></div><div class="in"><span class="tag">IBM SkillsBuild</span><h3>Artificial Intelligence Fundamentals</h3><p>Foundations of artificial intelligence, awarded by IBM SkillsBuild. Issued 1 Aug 2026.</p><div class="links"><span class="btn">Open certificate</span></div></div>
       </a>
     </div>
-    <h2 style="margin-top:70px">Achievements</h2>
-    <div class="cols">
-      <div class="glass"><h3>Open House Project Exhibition</h3><p style="margin-top:8px">Presented a university project to visitors and faculty, explaining its features and technical implementation.</p></div>
-      <div class="glass"><h3>Alibaba Cloud AI Hackathon</h3><p style="margin-top:8px">Participated in an AI-focused hackathon, applying AI concepts to problem solving and building a technology solution.</p></div>
+    <div class="achieve-wrap">
+      <div class="achieve-header">
+        <span class="exp-eyebrow">HONORS & RECOGNITION</span>
+        <h2 class="achieve-title">Achievements</h2>
+      </div>
+      <div class="achieve-grid">
+        <article class="glass achieve-card">
+          <div class="achieve-top">
+            <span class="achieve-badge">Project Exhibition</span>
+            <span class="achieve-platform">Foundation University</span>
+          </div>
+          <h3>Open House Project Exhibition</h3>
+          <p class="achieve-org">Technical Architecture & Live Demonstration</p>
+          <p class="achieve-desc">Selected to present an advanced software engineering project to visiting industry guests, academic deans, and evaluators. Demonstrated live interactive features, explained architectural pipelines, and addressed technical questions from evaluation panels.</p>
+          <div class="achieve-chips">
+            <span>Live Technical Demo</span>
+            <span>Architecture Presentation</span>
+            <span>Public Evaluation</span>
+          </div>
+        </article>
+
+        <article class="glass achieve-card">
+          <div class="achieve-top">
+            <span class="achieve-badge">Hackathon Competition</span>
+            <span class="achieve-platform">Alibaba Cloud</span>
+          </div>
+          <h3>Alibaba Cloud AI Hackathon</h3>
+          <p class="achieve-org">Competitive Artificial Intelligence Engineering</p>
+          <p class="achieve-desc">Competed in an intensive AI-focused engineering hackathon. Collaborated rapidly under strict competition timelines to formulate machine learning approaches, apply cloud-native AI services, and build a functional technical prototype.</p>
+          <div class="achieve-chips">
+            <span>AI Problem Solving</span>
+            <span>Rapid Prototyping</span>
+            <span>Cloud AI Integration</span>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
   <section id="contact">
     <h2>Let’s work together</h2>
-    <a class="big" href="mailto:fatimaiqbal1166@gmail.com">fatimaiqbal1166@gmail.com</a>
+    <a class="big" href="https://mail.google.com/mail/?view=cm&fs=1&to=fatimaiqbal1166@gmail.com" target="_blank" rel="noopener" aria-label="Compose email to fatimaiqbal1166@gmail.com in Gmail">fatimaiqbal1166@gmail.com</a>
     <p class="lead">Phone: +92 340 5451403</p>
     <div class="row">
-      <a class="btn fill" href="mailto:fatimaiqbal1166@gmail.com">Send an email</a>
+      <a class="btn fill" href="https://mail.google.com/mail/?view=cm&fs=1&to=fatimaiqbal1166@gmail.com" target="_blank" rel="noopener">Open in Gmail</a>
+      <a class="btn" href="mailto:fatimaiqbal1166@gmail.com">Default Mail App</a>
       <a class="btn" href="https://github.com/Fatima1166" target="_blank" rel="noopener">GitHub</a>
       <a class="btn" href="https://www.linkedin.com/in/fatima1166/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
