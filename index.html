@@ -49,8 +49,24 @@ ul.plain li::before{content:"";position:absolute;left:0;top:.85em;width:7px;heig
 .tech{display:flex;flex-wrap:wrap;gap:8px}
 .tech span{font-size:.85rem;padding:3px 12px;border-radius:999px;background:rgba(7,28,52,.7);border:1px solid var(--line)}
 .card .btn{align-self:flex-start;padding:8px 20px;font-size:.95rem}
-.skill dt{font:700 1rem var(--display);color:#fff;margin-bottom:4px}
-.skill dd{color:var(--mist)}
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px;perspective:1100px}
+.skill-card{display:flex;flex-direction:column;padding:26px 28px 28px;border-radius:20px;transform-style:preserve-3d;transition:transform .25s ease-out,border-color .25s,box-shadow .25s;will-change:transform}
+.skill-card:hover{border-color:var(--sky);box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 1px rgba(135,178,204,.45)}
+.skill-head{display:flex;align-items:flex-start;gap:14px;position:relative}
+.skill-icon{width:44px;height:44px;flex-shrink:0;border-radius:12px;background:rgba(7,28,52,.65);border:1px solid var(--line);display:grid;place-items:center;color:var(--sky);box-shadow:inset 0 1px 0 rgba(192,206,209,.12)}
+.skill-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.skill-info{flex:1;padding-right:34px}
+.skill-title{font:700 1.25rem/1.2 'Playfair Display',Georgia,serif;color:#fff;letter-spacing:-.01em}
+.skill-desc{font:400 .86rem/1.45 var(--body);color:var(--mist);margin-top:4px;opacity:.9}
+.skill-count{position:absolute;top:0;right:0;font:700 .92rem var(--display);color:var(--sky);letter-spacing:.04em;opacity:.85}
+.skill-items{margin-top:22px;padding-top:18px;border-top:1px solid rgba(135,178,204,.14);list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 16px}
+.skill-items li{display:flex;align-items:center;gap:9px;font:500 .94rem/1.35 var(--body);color:#fff}
+.skill-bullet{width:6px;height:6px;border-radius:50%;background:var(--steel);flex-shrink:0;box-shadow:0 0 6px rgba(98,152,188,.6);transition:background .2s,box-shadow .2s}
+.skill-card:hover .skill-bullet{background:var(--sky);box-shadow:0 0 8px var(--sky)}
+@media(max-width:440px){
+  .skill-items{grid-template-columns:1fr;gap:8px}
+  .skill-card{padding:20px 20px 22px}
+}
 footer{position:relative;z-index:1;text-align:center;padding:30px 5vw 40px;color:var(--sky);font-size:.9rem}
 #contact .big{font:800 clamp(1.5rem,4.2vw,3.2rem)/1.15 var(--display);color:#fff;text-decoration:none;word-break:break-all}
 #contact .big:hover{color:var(--sky)}
@@ -205,7 +221,7 @@ h2::after{content:"";display:block;width:64px;height:4px;border-radius:4px;margi
 
   <section id="skills">
     <h2>Technical skills</h2>
-    <dl class="cols" id="skillList"></dl>
+    <div class="skill-grid" id="skillList"></div>
   </section>
 
   <section id="more">
@@ -253,7 +269,14 @@ const PROJECTS=[
  {t:'AI / RAG',n:'RAGDOC Assistant',d:'A document assistant using Retrieval-Augmented Generation so users can query uploaded documents and get accurate, context-aware answers.',k:['RAG','LLM','Python'],l:[['GitHub',G+'rag-doc-assistant']]},
  {t:'Data Analysis and Visualization',n:'FUI Energy Analytics',d:'Analysis and visualization of Pakistan’s energy data to uncover trends and support research findings, shared through dashboards and reports.',k:['Python','Power BI','Data Analysis'],l:[['GitHub',G+'Energy-Analytics']]}
 ];
-const SKILLS=[['Programming languages','Python, C++, JavaScript, C#, PHP'],['AI and machine learning','Machine Learning Fundamentals, LLMs, RAG, Data Analysis'],['Web technologies','Full Stack Development, HTML5, CSS3, ASP.NET'],['Mobile development','React Native, Expo'],['Databases','MySQL, Firebase, SQL Server'],['Tools','Git, GitHub, VS Code, Visual Studio, Google Colab, Power BI'],['Concepts','File Handling, Networking Fundamentals, Cyber Security']];
+const SKILLS=[
+ {title:'Frontend Development',desc:'Visual screens, buttons, and layouts people interact with.',icon:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',items:['React.js','JavaScript (ES6+)','React Native','HTML5','CSS3','Tailwind CSS']},
+ {title:'Backend & Full-Stack',desc:'Behind-the-scenes logic, APIs, and servers powering complete apps.',icon:'<svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><line x1="6" y1="6.5" x2="6.01" y2="6.5" stroke-width="2.5"/><line x1="6" y1="17.5" x2="6.01" y2="17.5" stroke-width="2.5"/></svg>',items:['Node.js','Full-Stack Development','FastAPI','ASP.NET Core','PHP','RESTful APIs']},
+ {title:'AI & Machine Learning',desc:'Intelligent models, retrieval generation, and predictive analytics.',icon:'<svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>',items:['Machine Learning','LLMs & AI Prompting','RAG Architecture','Data Analysis','Energy Analytics','Data Visualization']},
+ {title:'Programming Languages',desc:'Core languages used to engineer software, ciphers, and algorithms.',icon:'<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',items:['Python','JavaScript','C++','C#','PHP','SQL']},
+ {title:'Databases & Storage',desc:'Structured schemas, relational queries, and cloud storage systems.',icon:'<svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',items:['MySQL','Firebase Firestore','SQL Server','Database Design','Data Modeling','Query Optimization']},
+ {title:'Tools & Concepts',desc:'Development environments, version control, analytics, and core CS.',icon:'<svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',items:['Git & GitHub','Power BI Dashboards','VS Code & Visual Studio','Google Colab','OOP & Data Structures','Cyber Security']}
+];
 const grid=document.getElementById('grid');
 PROJECTS.forEach((p,i)=>{const c=document.createElement('article');c.className='glass card';
  c.innerHTML=`<div class="top"></div><div class="in"><span class="tag">${p.t}</span><h3>${p.n}</h3><p>${p.d}</p><div class="tech">${p.k.map(x=>`<span>${x}</span>`).join('')}</div>`+
@@ -264,7 +287,17 @@ PROJECTS.forEach((p,i)=>{const c=document.createElement('article');c.className='
  c.addEventListener('pointerleave',()=>c.style.transform='');
 });
 document.querySelectorAll('.cert').forEach(c=>{c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg) translateZ(14px)`});c.addEventListener('pointerleave',()=>c.style.transform='')});
-document.getElementById('skillList').innerHTML=SKILLS.map(([a,b])=>`<div class="glass skill"><dt>${a}</dt><dd>${b}</dd></div>`).join('');
+const skillBox=document.getElementById('skillList');
+skillBox.innerHTML=SKILLS.map(s=>{
+ const cnt=s.items.length<10?'0'+s.items.length:s.items.length;
+ const lis=s.items.map(it=>`<li><span class="skill-bullet"></span><span>${it}</span></li>`).join('');
+ return `<article class="glass skill-card"><div class="skill-head"><div class="skill-icon" aria-hidden="true">${s.icon}</div><div class="skill-info"><h3 class="skill-title">${s.title}</h3><p class="skill-desc">${s.desc}</p></div><span class="skill-count">${cnt}</span></div><ul class="skill-items">${lis}</ul></article>`;
+}).join('');
+skillBox.querySelectorAll('.skill-card').forEach(c=>{
+ c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  c.style.transform=`rotateY(${x*12}deg) rotateX(${-y*12}deg) translateZ(10px)`});
+ c.addEventListener('pointerleave',()=>c.style.transform='');
+});
 
 document.addEventListener('pointermove',e=>{const g=e.target.closest&&e.target.closest('.glass');if(g){const r=g.getBoundingClientRect();g.style.setProperty('--mx',(e.clientX-r.left)+'px');g.style.setProperty('--my',(e.clientY-r.top)+'px')}});
 const bar=document.getElementById('bar'),navLinks=[...document.querySelectorAll('nav a')],navSecs=navLinks.map(a=>document.querySelector(a.getAttribute('href')));
