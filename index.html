@@ -482,91 +482,348 @@
       color: transparent
     }
 
-    /* Hamburger toggle button – hidden on desktop */
-    .menu-toggle {
-      display: none
+    /* ==========================================================================
+       HEADER & NAVIGATION (Desktop Base Styles)
+       ========================================================================== */
+    header {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: min(1080px, 92vw);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 8px 12px 8px 14px;
+      border-radius: 999px;
+      background: rgba(7, 28, 52, .62);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(192, 206, 209, .12);
     }
 
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font: 700 1.02rem var(--display);
+      text-decoration: none;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .mono {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      transition: transform .35s cubic-bezier(.2, .8, .2, 1), filter .35s ease;
+    }
+
+    .mono svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(98, 152, 188, .45));
+    }
+
+    .logo:hover .mono {
+      transform: rotate(-6deg) scale(1.08);
+      filter: drop-shadow(0 0 14px rgba(242, 153, 74, .7));
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: .93rem;
+    }
+
+    header nav a {
+      text-decoration: none;
+      color: var(--mist);
+      padding: 7px 14px;
+      border-radius: 999px;
+      transition: background .2s, color .2s;
+      white-space: nowrap;
+    }
+
+    header nav a:hover {
+      color: #fff;
+      background: rgba(135, 178, 204, .14);
+    }
+
+    header nav a.on {
+      color: var(--ink);
+      background: linear-gradient(135deg, var(--flame), var(--flame-glow));
+    }
+
+    .hire {
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--flame), var(--flame-glow));
+      color: var(--ink);
+      font-weight: 500;
+      text-decoration: none;
+      font-size: .93rem;
+      transition: background .2s, transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 14px rgba(242, 153, 74, .35);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .hire:hover {
+      background: linear-gradient(135deg, var(--flame-glow), var(--flame));
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(242, 153, 74, .5);
+    }
+
+    /* 3-Lines Hamburger button – hidden on desktop */
+    .menu-toggle {
+      display: none;
+    }
+
+    /* Mobile Drawer & Overlay – hidden by default on desktop */
     .drawer-overlay,
     .mobile-drawer {
-      display: none
+      display: none;
     }
 
-    @media(max-width:760px) {
+    /* Drawer internal styling */
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .drawer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font: 700 1.05rem var(--display);
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .drawer-logo .mono {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+    }
+
+    .drawer-close {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(135, 178, 204, .08);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: background .2s, border-color .2s, transform .25s;
+    }
+
+    .drawer-close:hover {
+      background: rgba(242, 153, 74, .2);
+      border-color: var(--flame);
+      transform: rotate(90deg);
+    }
+
+    .drawer-body {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 16px;
+      flex: 1;
+    }
+
+    .drawer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .drawer-nav a {
+      text-decoration: none;
+      color: var(--mist);
+      padding: 13px 18px;
+      border-radius: 12px;
+      font: 500 1.05rem/1.3 var(--display);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background .2s, color .2s, border-color .2s;
+      border: 1px solid transparent;
+    }
+
+    .drawer-nav a::after {
+      content: '→';
+      font-size: 1.15rem;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity .2s, transform .2s;
+      color: var(--flame);
+    }
+
+    .drawer-nav a:hover,
+    .drawer-nav a:active {
+      color: #fff;
+      background: rgba(135, 178, 204, .12);
+      border-color: rgba(135, 178, 204, .2);
+    }
+
+    .drawer-nav a:hover::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .drawer-nav a.on {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(242, 153, 74, .25), rgba(242, 201, 76, .15));
+      border-color: var(--flame);
+      font-weight: 600;
+    }
+
+    .drawer-nav a.on::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .drawer-footer {
+      padding: 16px 18px 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .drawer-footer .btn {
+      width: 100%;
+      text-align: center;
+      padding: 13px 20px;
+      font-size: 1rem;
+    }
+
+    .drawer-socials {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      font-size: .85rem;
+      color: var(--line);
+    }
+
+    .drawer-socials a {
+      color: var(--sky);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .drawer-socials a:hover {
+      color: var(--flame);
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .hero-in>* {
+        animation: none;
+      }
+      html {
+        scroll-behavior: auto;
+      }
+      .card {
+        transition: none;
+      }
+    }
+
+    /* ==========================================================================
+       MOBILE & TABLET RESPONSIVE LAYOUT (<= 960px)
+       Activates the 3-Lines Drawer Navigation
+       ========================================================================== */
+    @media (max-width: 960px) {
       header {
         top: 10px;
-        border-radius: 999px;
-        padding: 8px 12px 8px 14px;
         width: calc(100vw - 24px);
         max-width: 100%;
+        padding: 8px 14px;
+        border-radius: 999px;
         display: flex;
         align-items: center;
         justify-content: space-between;
       }
 
-      nav {
-        display: none
+      /* HIDE the desktop horizontal navbar and download CV button */
+      header nav,
+      header > nav,
+      header .hire {
+        display: none !important;
       }
 
-      .hire {
-        display: none
-      }
-
+      /* SHOW the 3-lines hamburger menu toggle button */
       .menu-toggle {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 5px;
-        width: 40px;
-        height: 40px;
+        width: 42px;
+        height: 42px;
         border-radius: 50%;
         border: 1px solid var(--line);
         background: rgba(7, 28, 52, .6);
         cursor: pointer;
         padding: 0;
         margin-left: auto;
-        transition: background .2s, border-color .2s
+        flex-shrink: 0;
+        transition: background .2s, border-color .2s;
       }
 
       .menu-toggle:hover {
-        border-color: var(--sky);
-        background: rgba(135, 178, 204, .14)
+        border-color: var(--flame);
+        background: rgba(242, 153, 74, .15);
       }
 
+      /* 3 horizontal bars inside the button */
       .menu-toggle .bar {
         display: block;
-        width: 18px;
+        width: 20px;
         height: 2px;
         border-radius: 2px;
         background: #fff;
-        transition: transform .3s ease, opacity .3s ease
+        transition: transform .3s ease, opacity .3s ease;
       }
 
+      /* Animated 3-lines into X when drawer is open */
       .menu-toggle.open .bar:nth-child(1) {
-        transform: translateY(7px) rotate(45deg)
+        transform: translateY(7px) rotate(45deg);
       }
 
       .menu-toggle.open .bar:nth-child(2) {
-        opacity: 0
+        opacity: 0;
       }
 
       .menu-toggle.open .bar:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg)
+        transform: translateY(-7px) rotate(-45deg);
       }
 
-      /* Mobile Drawer Overlay */
+      /* Mobile Drawer Overlay Backdrop */
       .drawer-overlay {
         display: block;
         position: fixed;
         inset: 0;
-        background: rgba(3, 14, 26, 0.72);
+        background: rgba(3, 14, 26, 0.75);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
         z-index: 998;
         opacity: 0;
         pointer-events: none;
-        transition: opacity .3s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: opacity .3s ease;
       }
 
       .drawer-overlay.open {
@@ -574,7 +831,7 @@
         pointer-events: auto;
       }
 
-      /* Mobile Side Drawer */
+      /* Mobile Side Drawer Container */
       .mobile-drawer {
         display: flex;
         flex-direction: column;
@@ -582,7 +839,7 @@
         top: 0;
         right: 0;
         bottom: 0;
-        width: min(320px, 84vw);
+        width: min(320px, 85vw);
         height: 100vh;
         height: 100dvh;
         background: rgba(7, 28, 52, .96);
@@ -601,259 +858,22 @@
         transform: translateX(0);
       }
 
-      .drawer-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px 20px 16px;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .drawer-logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font: 700 1.05rem var(--display);
-        text-decoration: none;
-        color: #fff;
-      }
-
-      .drawer-logo .mono {
-        width: 32px;
-        height: 32px;
-        display: inline-flex;
-      }
-
-      .drawer-close {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        border: 1px solid var(--line);
-        background: rgba(135, 178, 204, .08);
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        padding: 0;
-        transition: background .2s, border-color .2s, transform .25s;
-      }
-
-      .drawer-close:hover {
-        background: rgba(242, 153, 74, .2);
-        border-color: var(--flame);
-        transform: rotate(90deg);
-      }
-
-      .drawer-body {
-        display: flex;
-        flex-direction: column;
-        padding: 20px 16px;
-        flex: 1;
-      }
-
-      .drawer-nav {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .drawer-nav a {
-        text-decoration: none;
-        color: var(--mist);
-        padding: 12px 16px;
-        border-radius: 12px;
-        font: 500 1.05rem/1.3 var(--display);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        transition: background .2s, color .2s, border-color .2s;
-        border: 1px solid transparent;
-      }
-
-      .drawer-nav a::after {
-        content: '→';
-        font-size: 1.1rem;
-        opacity: 0;
-        transform: translateX(-4px);
-        transition: opacity .2s, transform .2s;
-        color: var(--flame);
-      }
-
-      .drawer-nav a:hover,
-      .drawer-nav a:active {
-        color: #fff;
-        background: rgba(135, 178, 204, .12);
-        border-color: rgba(135, 178, 204, .2);
-      }
-
-      .drawer-nav a:hover::after {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      .drawer-nav a.on {
-        color: #fff;
-        background: linear-gradient(135deg, rgba(242, 153, 74, .25), rgba(242, 201, 76, .15));
-        border-color: var(--flame);
-        font-weight: 600;
-      }
-
-      .drawer-nav a.on::after {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      .drawer-footer {
-        padding: 16px 18px 24px;
-        border-top: 1px solid var(--line);
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .drawer-footer .btn {
-        width: 100%;
-        text-align: center;
-        padding: 13px 20px;
-        font-size: 1rem;
-      }
-
-      .drawer-socials {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        font-size: .85rem;
-        color: var(--line);
-      }
-
-      .drawer-socials a {
-        color: var(--sky);
-        text-decoration: none;
-        transition: color .2s;
-      }
-
-      .drawer-socials a:hover {
-        color: var(--flame);
+      .lname {
+        display: inline-block;
+        font-size: .95rem;
       }
 
       section {
-        padding-top: 90px
+        padding-top: 90px;
       }
 
       #bg {
-        opacity: .55
+        opacity: .55;
       }
 
       .glass {
-        background: rgba(7, 28, 52, .72)
+        background: rgba(7, 28, 52, .72);
       }
-    }
-
-    @media(prefers-reduced-motion:reduce) {
-      .hero-in>* {
-        animation: none
-      }
-
-      html {
-        scroll-behavior: auto
-      }
-
-      .card {
-        transition: none
-      }
-    }
-
-    header {
-      position: fixed;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 5;
-      width: min(1080px, 92vw);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 8px 10px 8px 12px;
-      border-radius: 999px;
-      background: rgba(7, 28, 52, .62);
-      border: 1px solid var(--line);
-      backdrop-filter: blur(16px) saturate(140%);
-      -webkit-backdrop-filter: blur(16px) saturate(140%);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(192, 206, 209, .12)
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font: 700 1.02rem var(--display);
-      text-decoration: none;
-      color: #fff
-    }
-
-    .mono {
-      display: grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      transition: transform .35s cubic-bezier(.2, .8, .2, 1), filter .35s ease
-    }
-
-    .mono svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      filter: drop-shadow(0 0 10px rgba(98, 152, 188, .45))
-    }
-
-    .logo:hover .mono {
-      transform: rotate(-6deg) scale(1.08);
-      filter: drop-shadow(0 0 14px rgba(242, 153, 74, .7))
-    }
-
-    nav {
-      display: flex;
-      gap: 4px;
-      font-size: .93rem
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--mist);
-      padding: 7px 14px;
-      border-radius: 999px;
-      transition: background .2s, color .2s
-    }
-
-    nav a:hover {
-      color: #fff;
-      background: rgba(135, 178, 204, .14)
-    }
-
-    nav a.on {
-      color: var(--ink);
-      background: linear-gradient(135deg, var(--flame), var(--flame-glow))
-    }
-
-    .hire {
-      padding: 10px 22px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--flame), var(--flame-glow));
-      color: var(--ink);
-      font-weight: 500;
-      text-decoration: none;
-      font-size: .93rem;
-      transition: background .2s, transform .2s, box-shadow .2s;
-      box-shadow: 0 4px 14px rgba(242, 153, 74, .35)
-    }
-
-    .hire:hover {
-      background: linear-gradient(135deg, var(--flame-glow), var(--flame));
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(242, 153, 74, .5)
     }
 
     #bar {
