@@ -412,6 +412,52 @@
       }
     }
 
+    
+    /* Services Section Styles (Oval Badges) */
+    .services-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 34px 30px;
+      border-radius: 24px;
+      margin-top: 26px;
+      align-items: center;
+    }
+
+    .service-oval {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 24px;
+      border-radius: 999px;
+      background: rgba(7, 28, 52, .75);
+      border: 1px solid var(--line);
+      color: var(--flame-glow);
+      font: 500 1.02rem/1.2 var(--display);
+      letter-spacing: .01em;
+      cursor: default;
+      transition: border-color .25s ease, color .25s ease, background .25s ease, transform .25s ease, box-shadow .25s ease;
+      user-select: none;
+    }
+
+    .service-oval:hover {
+      border-color: var(--flame);
+      color: #fff;
+      background: rgba(242, 153, 74, .14);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .3), 0 0 16px rgba(242, 153, 74, .3);
+    }
+
+    @media(max-width:760px) {
+      .services-box {
+        padding: 22px 16px;
+        gap: 10px;
+      }
+      .service-oval {
+        padding: 9px 16px;
+        font-size: .92rem;
+      }
+    }
+
     footer {
       position: relative;
       z-index: 1;
@@ -441,16 +487,21 @@
       display: none
     }
 
-    .mobile-nav {
+    .drawer-overlay,
+    .mobile-drawer {
       display: none
     }
 
     @media(max-width:760px) {
       header {
-        border-radius: 18px;
-        padding: 6px 8px 6px 10px;
+        top: 10px;
+        border-radius: 999px;
+        padding: 8px 12px 8px 14px;
         width: calc(100vw - 24px);
         max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
 
       nav {
@@ -504,72 +555,195 @@
         transform: translateY(-7px) rotate(-45deg)
       }
 
-      .mobile-nav {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
+      /* Mobile Drawer Overlay */
+      .drawer-overlay {
+        display: block;
         position: fixed;
-        top: 72px;
-        left: 12px;
-        right: 12px;
-        z-index: 10;
-        padding: 20px 18px 22px;
-        border-radius: 20px;
-        background: rgba(7, 28, 52, .92);
-        border: 1px solid var(--line);
-        backdrop-filter: blur(20px) saturate(160%);
-        -webkit-backdrop-filter: blur(20px) saturate(160%);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(192, 206, 209, .1);
+        inset: 0;
+        background: rgba(3, 14, 26, 0.72);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 998;
         opacity: 0;
-        transform: translateY(-12px) scale(.97);
         pointer-events: none;
-        transition: opacity .25s ease, transform .25s ease
+        transition: opacity .3s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
-      .mobile-nav.open {
+      .drawer-overlay.open {
         opacity: 1;
-        transform: translateY(0) scale(1);
-        pointer-events: auto
+        pointer-events: auto;
       }
 
-      .mobile-nav nav {
+      /* Mobile Side Drawer */
+      .mobile-drawer {
         display: flex;
         flex-direction: column;
-        gap: 2px
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(320px, 84vw);
+        height: 100vh;
+        height: 100dvh;
+        background: rgba(7, 28, 52, .96);
+        border-left: 1px solid var(--line);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        box-shadow: -15px 0 50px rgba(0, 0, 0, .7);
+        z-index: 999;
+        transform: translateX(105%);
+        transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow-y: auto;
+        overscroll-behavior: contain;
       }
 
-      .mobile-nav nav a {
+      .mobile-drawer.open {
+        transform: translateX(0);
+      }
+
+      .drawer-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 20px 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .drawer-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font: 700 1.05rem var(--display);
+        text-decoration: none;
+        color: #fff;
+      }
+
+      .drawer-logo .mono {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+      }
+
+      .drawer-close {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: rgba(135, 178, 204, .08);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
+        transition: background .2s, border-color .2s, transform .25s;
+      }
+
+      .drawer-close:hover {
+        background: rgba(242, 153, 74, .2);
+        border-color: var(--flame);
+        transform: rotate(90deg);
+      }
+
+      .drawer-body {
+        display: flex;
+        flex-direction: column;
+        padding: 20px 16px;
+        flex: 1;
+      }
+
+      .drawer-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .drawer-nav a {
         text-decoration: none;
         color: var(--mist);
         padding: 12px 16px;
         border-radius: 12px;
         font: 500 1.05rem/1.3 var(--display);
-        transition: background .2s, color .2s
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background .2s, color .2s, border-color .2s;
+        border: 1px solid transparent;
       }
 
-      .mobile-nav nav a:hover,
-      .mobile-nav nav a:active {
+      .drawer-nav a::after {
+        content: '→';
+        font-size: 1.1rem;
+        opacity: 0;
+        transform: translateX(-4px);
+        transition: opacity .2s, transform .2s;
+        color: var(--flame);
+      }
+
+      .drawer-nav a:hover,
+      .drawer-nav a:active {
         color: #fff;
-        background: rgba(135, 178, 204, .12)
+        background: rgba(135, 178, 204, .12);
+        border-color: rgba(135, 178, 204, .2);
       }
 
-      .mobile-nav nav a.on {
-        color: var(--ink);
-        background: linear-gradient(135deg, var(--flame), var(--flame-glow))
+      .drawer-nav a:hover::after {
+        opacity: 1;
+        transform: translateX(0);
       }
 
-      .mobile-nav>.btn {
+      .drawer-nav a.on {
+        color: #fff;
+        background: linear-gradient(135deg, rgba(242, 153, 74, .25), rgba(242, 201, 76, .15));
+        border-color: var(--flame);
+        font-weight: 600;
+      }
+
+      .drawer-nav a.on::after {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .drawer-footer {
+        padding: 16px 18px 24px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .drawer-footer .btn {
+        width: 100%;
         text-align: center;
-        margin-top: 10px;
         padding: 13px 20px;
-        font-size: 1rem
+        font-size: 1rem;
+      }
+
+      .drawer-socials {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        font-size: .85rem;
+        color: var(--line);
+      }
+
+      .drawer-socials a {
+        color: var(--sky);
+        text-decoration: none;
+        transition: color .2s;
+      }
+
+      .drawer-socials a:hover {
+        color: var(--flame);
       }
 
       section {
         padding-top: 90px
       }
+    }
 
-      #bg {
+    #bg {
         opacity: .55
       }
 
@@ -904,7 +1078,8 @@
 
     @media(max-width:760px) {
       .lname {
-        display: none
+        display: inline-block;
+        font-size: .95rem;
       }
     }
 
@@ -1698,7 +1873,7 @@
     </a>
     <nav aria-label="Main">
       <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a
-        href="#skills">Skills</a><a href="#more">Certifications</a><a href="#contact">Contact</a>
+        href="#skills">Skills</a><a href="#services">Services</a><a href="#more">Certifications</a><a href="#contact">Contact</a>
     </nav>
     <a class="hire" href="cv/Fatima_Iqbal_Resume.pdf" download="Fatima_Iqbal_Resume.pdf">Download CV</a>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
@@ -1706,18 +1881,48 @@
       <span class="bar"></span>
       <span class="bar"></span>
     </button>
-    <div class="mobile-nav" id="mobileNav">
-      <nav aria-label="Mobile">
+  </header>
+
+  <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+  <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation" aria-hidden="true">
+    <div class="drawer-head">
+      <a class="drawer-logo" href="#home">
+        <span class="mono" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fatima Iqbal logo">
+            <polygon points="50,5 89,27 89,73 50,95 11,73 11,27" fill="rgba(7,28,52,0.85)" stroke="url(#lg-f1)" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M 27 28 L 27 72 M 27 28 L 48 28 M 27 50 L 44 50" stroke="#ffffff" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+            <path d="M 27 50 L 44 50" stroke="#F2994A" stroke-width="4.2" stroke-linecap="round" fill="none" opacity="0.92"/>
+            <path d="M 60 28 L 73 28 M 66.5 28 L 66.5 72 M 60 72 L 73 72" stroke="#ffffff" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+          </svg>
+        </span>
+        <span class="lname">Fatima Iqbal</span>
+      </a>
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <nav class="drawer-nav" aria-label="Mobile Navigation">
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
+        <a href="#services">Services</a>
         <a href="#more">Certifications</a>
         <a href="#contact">Contact</a>
       </nav>
-      <a class="btn fill" href="cv/Fatima_Iqbal_Resume.pdf" download="Fatima_Iqbal_Resume.pdf">Download CV</a>
     </div>
-  </header>
+    <div class="drawer-footer">
+      <a class="btn fill" href="cv/Fatima_Iqbal_Resume.pdf" download="Fatima_Iqbal_Resume.pdf">Download CV</a>
+      <div class="drawer-socials">
+        <a href="https://github.com/Fatima1166" target="_blank" rel="noopener">GitHub</a>
+        <span>•</span>
+        <a href="https://www.linkedin.com/in/fatima1166/" target="_blank" rel="noopener">LinkedIn</a>
+        <span>•</span>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=fatimaiqbal1166@gmail.com" target="_blank" rel="noopener">Gmail</a>
+      </div>
+    </div>
+  </aside>
   <main>
     <section id="home">
       <div class="hero-in">
@@ -1750,9 +1955,7 @@
           <p class="about-bio-text">My journey merges applied research in energy analytics with hands-on software
             engineering — architecting everything from medical AI skin analysis tools to custom metamorphic ciphers and
             real-time operational dashboards.</p>
-          <p class="about-bio-text">Through academic leadership as a Teaching Assistant in Programming Fundamentals and
-            Research Assistant in Energy Analytics, I have refined my expertise in OOP, data structures, and RESTful
-            architectures with a disciplined, collaborative mindset.</p>
+          <p class="about-bio-text">Driven by a rigorous problem-solving approach, I specialize in designing robust OOP systems, high-efficiency data pipelines, and scalable RESTful architectures. I thrive at the intersection of machine learning and modern web technologies to engineer impactful, real-world solutions.</p>
           <div class="about-badges">
             <span class="about-badge">Islamabad, Pakistan</span>
             <span class="about-badge">Expected Grad: 2027</span>
@@ -1862,6 +2065,24 @@
     <section id="skills">
       <h2>Technical skills</h2>
       <div class="skill-grid" id="skillList"></div>
+    </section>
+
+    <section id="services">
+      <div class="exp-header">
+        <span class="exp-eyebrow">SERVICES</span>
+        <h2 class="exp-title">What I Offer</h2>
+      </div>
+      <div class="glass services-box">
+        <span class="service-oval">Web Development</span>
+          <span class="service-oval">UI & Frontend Development</span>
+        <span class="service-oval">Mobile App Development</span>
+        <span class="service-oval">AI & Machine Learning Solutions</span>
+        <span class="service-oval">Backend Development</span>
+        <span class="service-oval">API Integration</span>
+        <span class="service-oval">Data Analytics & Visualization</span>
+        <span class="service-oval">Website Redesign & Bug Fixing</span>
+        <span class="service-oval">Database Development</span>
+      </div>
     </section>
 
     <section id="more">
@@ -1978,14 +2199,14 @@
     const PROJECTS = [
       { t: 'Final Year Project · AI & Mobile', n: 'DermaScanAI: Smart SkinCare', d: 'DermaScanAI is an intelligent healthcare and dermatological assistance mobile application engineered as a final-year capstone project. It leverages deep convolutional neural network models for high-accuracy skin condition classification alongside large language models (LLMs) to synthesize customized, evidence-based skincare routines and safety guidance. The frontend is built using React Native and Expo for a smooth cross-platform mobile experience, fully integrated with Firebase for secure user authentication, real-time encrypted consultation storage, and medical image processing.', k: ['Machine Learning', 'LLM', 'React Native', 'Firebase'], l: [['GitHub', G + 'DermaScanAI']], img: 'project/Derma.png' },
       { t: 'Dashboard / Web · Analytics', n: 'Ledgerline: Operations Dashboard', d: 'Ledgerline is an enterprise-grade operational management and business intelligence dashboard tailored for modern organizations to monitor day-to-day enterprise metrics. It consolidates disparate transactional logs, sales turnover, operational activity, and team workloads into cohesive real-time graphical visualizations. Designed with a modular web architecture, it provides role-based access control, interactive filtering, statistical trend analyses, and automated daily performance exports to empower management with clear, data-driven operational decision-making.', k: ['Dashboard', 'Web', 'Analytics', 'Data Visualization'], l: [['GitHub', G + 'ops-dashbaord']], img: 'project/ops-dashboard-thumbnail.png' },
-      { t: 'Management System · Full Stack', n: 'Varaqly Bookstore Management', d: 'Varaqly is a comprehensive full-stack bookstore and inventory management system created to streamline commercial book sales, cataloging, and customer relationship operations. Built with a scalable relational database architecture, the system provides automated stock tracking, dynamic threshold alerts for reordering, customer order fulfillment, and multi-tier transaction receipts. The platform features an intuitive administrative web dashboard that simplifies catalog navigation, daily sales ledger reconciliation, and customer purchasing history reporting.', k: ['Database', 'Web', 'PHP', 'MySQL', 'Inventory'], l: [['GitHub', G + 'varaqly']], img: 'project/Varaqly.png' },
+      { t: 'Management System · Full Stack', n: 'Varaqly Bookstore Management', d: 'Varaqly is a comprehensive full-stack bookstore and inventory management system created to streamline commercial book sales, cataloging, and customer relationship operations. Built with a scalable relational database architecture, the system provides automated stock tracking, dynamic threshold alerts for reordering, customer order fulfillment, and multi-tier transaction receipts. The platform features an intuitive administrative web dashboard that simplifies catalog navigation, daily sales ledger reconciliation, and customer purchasing history reporting.', k: ['Database', 'Web', 'React', 'MySQL', 'Inventory'], l: [['GitHub', G + 'varaqly']], img: 'project/Varaqly.png' },
       { t: 'Student Management System', n: 'Probation Evaluator', d: 'Probation Evaluator is an automated academic auditing and student progress management platform developed to evaluate student grade points and credit progression against stringent academic probation criteria. Backed by a high-throughput Python FastAPI backend and a responsive React Tailwind interface, it automates manual administrative evaluations, tracks student semester standings across degree pathways, highlights performance warning flags, and generates transparent, audit-ready compliance reports for faculty advisors.', k: ['FastAPI', 'React', 'Tailwind CSS', 'Python', 'Data Processing'], l: [['GitHub', G + 'Probation-Evaluator']], img: 'project/probation-evaluator-thumbnail.png' },
       { t: 'Data Security · Cryptography', n: 'Cognitive Metamorphic Cipher', d: 'Cognitive Metamorphic Cipher is a multi-layered cryptographic security application designed to protect sensitive corporate data against unauthorized access and cryptoanalysis attacks. Utilizing advanced cryptographic principles and polymorphic cipher design, the algorithm mutates its internal substitution and transposition matrices dynamically across execution cycles without compromising decryption integrity. Developed with secure PHP backend modules, the system implements robust data hashing, key derivation, and defensive cybersecurity mechanisms.', k: ['Cryptography', 'PHP', 'Security', 'Encryption', 'Cyber Security'], l: [['GitHub', G + 'CONITIVE-METAMORPHIC-CIPHER-']], img: 'project/Cognitive.png' },
       { t: 'AI / RAG · Document Assistant', n: 'RAGDOC Assistant', d: 'RAGDOC Assistant is an advanced document intelligence and conversational AI system built on Retrieval-Augmented Generation (RAG) architecture. It empowers users to upload complex, multi-page documents (PDFs, reports, manuals) and query them conversationally to receive grounded, cited, and context-aware responses with zero hallucination. Powered by Python, LangChain, high-dimensional vector embeddings, and large language models, the assistant efficiently chunks text, performs semantic similarity searches, and synthesizes answers instantly.', k: ['RAG', 'LLM', 'Python', 'Vector Search', 'LangChain'], l: [['GitHub', G + 'rag-doc-assistant']], img: 'project/rag-doc-assistant-thumbnail.png' },
-      { t: 'Data Analysis and Visualization', n: 'FUI Energy Analytics', d: 'FUI Energy Analytics is an extensive data science and energy intelligence research project developed at Foundation University to evaluate Pakistan’s national energy generation, distribution, and consumption dynamics. Leveraging Python data science pipelines (Pandas, NumPy, Scikit-Learn) and interactive Microsoft Power BI dashboards, the system uncovers load patterns, seasonal consumption trends, and transmission inefficiencies, delivering actionable statistical models and data visualizations that directly support academic research and policy planning.', k: ['Python', 'Power BI', 'Data Analysis', 'Machine Learning', 'Pandas'], l: [['GitHub', G + 'Energy-Analytics']], img: 'project/Energy-analytics.jpeg' }
+      { t: 'Data Analysis and Visualization', n: 'FUI Energy Analytics', d: 'FUI Energy Analytics is an extensive data science and energy intelligence research project developed at Foundation University to evaluate Pakistan’s national energy generation, distribution, and consumption dynamics. Leveraging Python data science pipelines (Pandas, NumPy, Scikit-Learn) and interactive Streamlit dashboards, the system uncovers load patterns, seasonal consumption trends, and transmission inefficiencies, delivering actionable statistical models and data visualizations that directly support academic research and policy planning.', k: ['Python', 'Streamlit', 'Data Analysis', 'Machine Learning', 'Pandas'], l: [['GitHub', G + 'Energy-Analytics']], img: 'project/Energy-analytics.jpeg' }
     ];
     const SKILLS = [
-      { title: 'Frontend Development', desc: 'Visual screens, buttons, and layouts people interact with.', icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>', items: ['React.js', 'JavaScript (ES6+)', 'React Native', 'HTML5', 'CSS3', 'Tailwind CSS'] },
+      { title: 'Frontend Development', desc: 'Visual screens, buttons, and layouts people interact with.', icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>', items: ['Next.js', 'React.js', 'JavaScript (ES6+)', 'React Native', 'HTML5', 'CSS3', 'Tailwind CSS'] },
       { title: 'Backend & Full-Stack', desc: 'Behind-the-scenes logic, APIs, and servers powering complete apps.', icon: '<svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><line x1="6" y1="6.5" x2="6.01" y2="6.5" stroke-width="2.5"/><line x1="6" y1="17.5" x2="6.01" y2="17.5" stroke-width="2.5"/></svg>', items: ['Node.js', 'Full-Stack Development', 'FastAPI', 'ASP.NET Core', 'PHP', 'RESTful APIs'] },
       { title: 'AI & Machine Learning', desc: 'Intelligent models, retrieval generation, and predictive analytics.', icon: '<svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>', items: ['Machine Learning', 'LLMs & AI Prompting', 'RAG Architecture', 'Data Analysis', 'Energy Analytics', 'Data Visualization'] },
       { title: 'Programming Languages', desc: 'Core languages used to engineer software, ciphers, and algorithms.', icon: '<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>', items: ['Python', 'JavaScript', 'C++', 'C#', 'PHP', 'SQL'] },
@@ -2048,7 +2269,7 @@
       const lis = s.items.map(it => `<li><span class="skill-bullet"></span><span>${it}</span></li>`).join('');
       return `<article class="glass skill-card"><div class="skill-head"><div class="skill-icon" aria-hidden="true">${s.icon}</div><div class="skill-info"><h3 class="skill-title">${s.title}</h3><p class="skill-desc">${s.desc}</p></div><span class="skill-count">${cnt}</span></div><ul class="skill-items">${lis}</ul></article>`;
     }).join('');
-    skillBox.querySelectorAll('.skill-card').forEach(c => {
+        skillBox.querySelectorAll('.skill-card').forEach(c => {
       c.addEventListener('pointermove', e => {
         const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
         c.style.transform = `rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateZ(10px)`
@@ -2102,61 +2323,67 @@
       frame();
     })();
 
-    /* Mobile hamburger menu toggle */
+    /* Mobile Drawer toggle logic */
     (function () {
       const toggle = document.getElementById('menuToggle');
-      const mobileNav = document.getElementById('mobileNav');
-      if (!toggle || !mobileNav) return;
+      const drawer = document.getElementById('mobileDrawer');
+      const overlay = document.getElementById('drawerOverlay');
+      const closeBtn = document.getElementById('drawerClose');
+      if (!toggle || !drawer || !overlay) return;
 
-      function closeMenu() {
-        toggle.classList.remove('open');
-        mobileNav.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Open menu');
+      function openDrawer() {
+        toggle.classList.add('open');
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        drawer.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
       }
 
-      function openMenu() {
-        toggle.classList.add('open');
-        mobileNav.classList.add('open');
-        toggle.setAttribute('aria-expanded', 'true');
-        toggle.setAttribute('aria-label', 'Close menu');
+      function closeDrawer() {
+        toggle.classList.remove('open');
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
       }
 
       toggle.addEventListener('click', function (e) {
         e.stopPropagation();
-        if (mobileNav.classList.contains('open')) closeMenu();
-        else openMenu();
+        if (drawer.classList.contains('open')) closeDrawer();
+        else openDrawer();
       });
 
-      /* Close menu when a nav link inside mobileNav is clicked */
-      mobileNav.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', closeMenu);
-      });
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          closeDrawer();
+        });
+      }
 
-      /* Close menu on outside click */
-      document.addEventListener('click', function (e) {
-        if (mobileNav.classList.contains('open') &&
-          !mobileNav.contains(e.target) &&
-          !toggle.contains(e.target)) {
-          closeMenu();
-        }
+      overlay.addEventListener('click', closeDrawer);
+
+      /* Close drawer when a nav link or CV button inside drawer is clicked */
+      drawer.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', closeDrawer);
       });
 
       /* Close on Escape key */
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && mobileNav.classList.contains('open')) closeMenu();
+        if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
       });
 
-      /* Sync active (on) state from desktop spy logic */
-      var mNavLinks = mobileNav.querySelectorAll('nav a');
-      function mobileSpy() {
-        var dLinks = document.querySelectorAll('header > nav a');
-        mNavLinks.forEach(function (a, i) {
-          if (dLinks[i]) a.classList.toggle('on', dLinks[i].classList.contains('on'));
+      /* Sync active link indicator */
+      const dLinks = drawer.querySelectorAll('.drawer-nav a');
+      function drawerSpy() {
+        const desktopLinks = document.querySelectorAll('header > nav a');
+        dLinks.forEach(function (a, i) {
+          if (desktopLinks[i]) a.classList.toggle('on', desktopLinks[i].classList.contains('on'));
         });
       }
-      addEventListener('scroll', mobileSpy, { passive: true });
-      mobileSpy();
+      addEventListener('scroll', drawerSpy, { passive: true });
+      drawerSpy();
     })();
   </script>
 </body>
